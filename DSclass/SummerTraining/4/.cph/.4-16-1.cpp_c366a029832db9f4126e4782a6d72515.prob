@@ -1,0 +1,1 @@
+{"name":"Local: 4-16-1","url":"d:\\VScode\\C++\\DSclass\\SummerTraining\\4\\4-16-1.cpp","tests":[{"id":1724420805737,"input":"4\n4 5 7 10 12 13\n4\n5 6 7 8 9 10\n0","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\VScode\\C++\\DSclass\\SummerTraining\\4\\4-16-1.cpp","group":"local","local":true}

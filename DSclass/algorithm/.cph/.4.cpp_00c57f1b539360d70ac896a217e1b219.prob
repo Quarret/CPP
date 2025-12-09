@@ -1,0 +1,1 @@
+{"name":"Local: 4","url":"d:\\VScodeC++\\C++\\DSclass\\algorithm\\4.cpp","tests":[{"id":1716475108349,"input":"200.00 3\n2 A:23.50 B:100.00\n1 C:650.00\n3 A:59.99 A:120.00 X:10.00","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\VScodeC++\\C++\\DSclass\\algorithm\\4.cpp","group":"local","local":true}

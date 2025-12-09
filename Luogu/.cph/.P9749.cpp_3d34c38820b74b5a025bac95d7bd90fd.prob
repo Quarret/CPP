@@ -1,0 +1,1 @@
+{"name":"Local: P9749","url":"d:\\VScode\\C++\\Luogu\\P9749.cpp","tests":[{"id":1724637848067,"input":"5 4\n10 10 10 10\n9 8 9 6 5","output":""},{"id":1724892754154,"input":"4 6279\n90560 55497 63624\n171 103 126 112","output":"4522"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\VScode\\C++\\Luogu\\P9749.cpp","group":"local","local":true}

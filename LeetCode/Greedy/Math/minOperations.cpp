@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+using i64 = long long;
+using namespace std;
+
+int minOperations(vector<int>& nums) {
+    unordered_map<int, int> cnt;
+    for (int x : nums) {
+        cnt[x]++;
+    }
+    
+    int ans = 0;
+    for (auto [_, c] : cnt) {
+        if (c == 1) {
+            return -1;
+        }
+        ans += (c + 2) / 3;
+    }
+
+    return ans;
+}
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    
+
+    return 0;
+}

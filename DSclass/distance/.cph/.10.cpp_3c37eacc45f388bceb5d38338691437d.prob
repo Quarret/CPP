@@ -1,0 +1,1 @@
+{"name":"Local: 10","url":"d:\\VScodeC++\\C++\\数据结构与算法\\线性结构\\10.cpp","tests":[{"id":1711282553438,"input":"11111","output":"0"},{"id":1711282560411,"input":"11100","output":"0"},{"id":1711282567287,"input":"10110100","output":"1"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\VScodeC++\\C++\\数据结构与算法\\线性结构\\10.cpp","group":"local","local":true}

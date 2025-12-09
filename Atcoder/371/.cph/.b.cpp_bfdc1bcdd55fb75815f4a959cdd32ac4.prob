@@ -1,0 +1,1 @@
+{"name":"Local: b","url":"d:\\VScode\\C++\\Atcoder\\371\\b.cpp","tests":[{"id":1726325348599,"input":"2 4\n1 M\n1 M\n2 F\n2 M\n","output":""},{"id":1726325404026,"input":"4 7\n2 M\n3 M\n1 F\n4 F\n4 F\n1 F\n2 M\n","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\VScode\\C++\\Atcoder\\371\\b.cpp","group":"local","local":true}

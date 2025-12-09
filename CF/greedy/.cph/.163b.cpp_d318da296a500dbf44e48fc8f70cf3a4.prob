@@ -1,0 +1,1 @@
+{"name":"Local: 163b","url":"d:\\VScodeC++\\C++\\CF\\greedy\\163b.cpp","tests":[{"id":1711979476282,"input":"4\n4\n12 3 45 67\n3\n12 28 5\n2\n0 0\n3\n29 30 45","output":"YES\nNO\nYES"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\VScodeC++\\C++\\CF\\greedy\\163b.cpp","group":"local","local":true}

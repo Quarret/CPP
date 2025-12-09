@@ -1,0 +1,1 @@
+{"name":"Local: 10179","url":"d:\\VScode\\C++\\HNUOJ\\10179.cpp","tests":[{"id":1724744458743,"input":"2\n12 13 45 23 53 23 88 123 3 125 10 87 89\n6 1 4 2 5 2 3","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\VScode\\C++\\HNUOJ\\10179.cpp","group":"local","local":true}

@@ -1,0 +1,1 @@
+{"name":"Local: P1449","url":"d:\\VScodeC++\\C++\\洛谷\\P1449.cpp","tests":[{"id":1710568136695,"input":"3*(15-2)+7","output":"16"},{"id":1710576163338,"input":"3+4*(15-3)","output":"11"},{"id":1710856555706,"input":"10*5-2/2+4","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\VScodeC++\\C++\\洛谷\\P1449.cpp","group":"local","local":true}

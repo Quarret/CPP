@@ -1,0 +1,1 @@
+{"name":"Local: P1241","url":"d:\\VScodeC++\\C++\\洛谷\\P1241.cpp","tests":[{"id":1710397583377,"input":"([()","output":"()[]()"},{"id":1710398478555,"input":"([)","output":"()[]()"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\VScodeC++\\C++\\洛谷\\P1241.cpp","group":"local","local":true}
