@@ -2,56 +2,42 @@
 using i64 = long long;
 using namespace std;
 
-// 代码示例：返回 [low, high] 中的恰好包含 target 个 0 的数字个数
-// 比如 digitDP(0, 10, 1) == 2
-// 要点：我们统计的是 0 的个数，需要区分【前导零】和【数字中的零】，前导零不能计入，而数字中的零需要计入
-long long digitDP(long long low, long long high, int target) {
-    string low_s = to_string(low);
-    string high_s = to_string(high);
-    int n = high_s.size();
-    int diff_lh = n - low_s.size();
-    vector memo(n, vector<long long>(target + 1, -1));
+class Solution {
+public:
+    int count(string num1, string num2, int min_sum, int max_sum) {
+        int n = num2.size();
+        num1 = string(n - num1.size(), '0') + num1; // 补前导零（本题前导零不影响答案，可以补前导零，简化代码逻辑）
 
-    auto dfs = [&](this auto&& dfs, int i, int cnt0, bool limit_low, bool limit_high) -> long long {
-        if (cnt0 > target) {
-            return 0; // 不合法
-        }
-        if (i == n) {
-            return cnt0 == target;
-        }
+        vector memo(n, vector<int>(min(9 * n, max_sum) + 1, -1));
+        auto dfs = [&](this auto&& dfs, int i, int sum, bool limit_low, bool limit_high) -> int {
+            if (sum > max_sum) { // 非法
+                return 0;
+            }
+            if (i == n) {
+                return sum >= min_sum;
+            }
+            if (!limit_low && !limit_high && memo[i][sum] != -1) {
+                return memo[i][sum];
+            }
 
-        if (!limit_low && !limit_high && memo[i][cnt0] >= 0) {
-            return memo[i][cnt0];
-        }
+            int lo = limit_low ? num1[i] - '0' : 0;
+            int hi = limit_high ? num2[i] - '0' : 9;
 
-        int lo = limit_low && i >= diff_lh ? low_s[i - diff_lh] - '0' : 0;
-        int hi = limit_high ? high_s[i] - '0' : 9;
+            int res = 0;
+            for (int d = lo; d <= hi; d++) { // 枚举当前数位填 d
+                res = (res + dfs(i + 1, sum + d, limit_low && d == lo, limit_high && d == hi)) % 1'000'000'007;
+            }
 
-        long long res = 0;
-        int d = lo;
+            if (!limit_low && !limit_high) {
+                memo[i][sum] = res;
+            }
+            return res;
+        };
 
-        // 通过 limit_low 和 i 可以判断能否不填数字，无需 is_num 参数
-        // 如果前导零不影响答案，去掉这个 if block
-        if (limit_low && i < diff_lh) {
-            // 不填数字，上界不受约束
-            res = dfs(i + 1, 0, true, false);
-            d = 1;
-        }
+        return dfs(0, 0, true, true);
+    }
+};
 
-        for (; d <= hi; d++) {
-            // 统计 0 的个数
-            res += dfs(i + 1, cnt0 + (d == 0), limit_low && d == lo, limit_high && d == hi);
-            // res %= MOD;
-        }
-
-        if (!limit_low && !limit_high) {
-            memo[i][cnt0] = res;
-        }
-        return res;
-    };
-
-    return dfs(0, 0, true, true);
-}
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
@@ -60,4 +46,3 @@ int main() {
 
     return 0;
 }
-
