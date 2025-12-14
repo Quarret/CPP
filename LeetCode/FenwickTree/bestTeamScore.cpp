@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-using i64 = long long;
+using ll = long long;
 using namespace std;
 
 // 模板来源 https://leetcode.cn/circle/discuss/mOr1u6/
@@ -15,7 +15,7 @@ public:
 
     // a[i] 增加 val
     // 1 <= i <= n
-    // 时间复杂度 O(log n)
+    // 时间复杂度 O(log n)  
     void update(int i, T val)
     {
         for (; i < tree.size(); i += i & -i)
@@ -50,54 +50,40 @@ public:
     }
 };
 
-class Solution
-{
+
+class Solution {
 public:
-    int countRangeSum(vector<int> &nums, int lower, int upper)
-    {
-        int n = nums.size();
-        vector<long long> pre(n + 1);
-        for (int i = 0; i < n; i++)
-        {
-            pre[i + 1] = pre[i] + 1LL * nums[i];
+    int bestTeamScore(vector<int>& scores, vector<int>& ages) {
+        int n = scores.size();
+        vector<int> sorted = scores;
+        ranges::sort(sorted);
+        sorted.erase(ranges::unique(sorted).begin(), sorted.end());
+
+        int m = sorted.size();
+        FenwickTree<int> t(m);
+        vector<int> idxs(n);
+        ranges::iota(idxs, 0);
+        ranges::sort(idxs, {}, [&](auto &i) {
+            return ages[i];
+        });
+
+        int ans = 0, res = 0;
+        for (int i = 0; i < n; i++) {
+            int idx = ranges::lower_bound(sorted, scores[idxs[i]]) - sorted.begin() + 1;
+            res += scores[idxs[i]];
+            cout << idx << '\n';
+            res -= t.query(idx + 1, m + 1);
+            t.update(idx, scores[idxs[i]]);
+            ans = max(ans, res);
         }
-
-        set<long long> st;
-        for (int i = 0; i <= n; i++)
-        {
-            st.insert(pre[i]);
-            st.insert(pre[i] - lower);
-            st.insert(pre[i] - upper);
-        }
-
-        unordered_map<long long, int> ranks;
-        int idx = 1;
-        for (int x : st)
-        {
-            ranks[x] = idx++;
-        }
-
-        FenwickTree<long long> t(st.size());
-        t.update(ranks[pre[0]], 1);
-
-        int ans = 0;
-        for (int i = 0; i < n; i++)
-        {
-            int left = ranks[pre[i + 1] - upper];
-            int right = ranks[pre[i + 1] - lower];
-            ans += t.query(left, right);
-
-            t.update(ranks[pre[i + 1]], 1);
-        }
-
         return ans;
     }
 };
-
-int main()
-{
+int main() {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
+
+    
 
     return 0;
 }

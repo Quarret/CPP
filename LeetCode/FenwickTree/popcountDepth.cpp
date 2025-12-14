@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-using i64 = long long;
+using ll = long long;
 using namespace std;
 
 // 模板来源 https://leetcode.cn/circle/discuss/mOr1u6/
@@ -50,54 +50,51 @@ public:
     }
 };
 
-class Solution
-{
+class Solution {
+
+    int popcount_depth(uint64_t x) {
+        int res = 0;
+        while (x > 1) {
+            res++;
+            x = __builtin_popcountll(x);
+        }
+        return res;
+    }
+
 public:
-    int countRangeSum(vector<int> &nums, int lower, int upper)
-    {
+    vector<int> popcountDepth(vector<long long>& nums, vector<vector<long long>>& queries) {
         int n = nums.size();
-        vector<long long> pre(n + 1);
-        for (int i = 0; i < n; i++)
-        {
-            pre[i + 1] = pre[i] + 1LL * nums[i];
+        vector t(6, FenwickTree<int>(n));
+        
+        auto update = [&](int i, int delta) -> void {
+            int d = popcount_depth(nums[i]);
+            t[d].update(i + 1, delta);
+        };
+
+        for (int i = 0; i < n; i++) {
+            update(i, 1);
         }
 
-        set<long long> st;
-        for (int i = 0; i <= n; i++)
-        {
-            st.insert(pre[i]);
-            st.insert(pre[i] - lower);
-            st.insert(pre[i] - upper);
-        }
-
-        unordered_map<long long, int> ranks;
-        int idx = 1;
-        for (int x : st)
-        {
-            ranks[x] = idx++;
-        }
-
-        FenwickTree<long long> t(st.size());
-        t.update(ranks[pre[0]], 1);
-
-        int ans = 0;
-        for (int i = 0; i < n; i++)
-        {
-            int left = ranks[pre[i + 1] - upper];
-            int right = ranks[pre[i + 1] - lower];
-            ans += t.query(left, right);
-
-            t.update(ranks[pre[i + 1]], 1);
+        vector<int> ans;
+        for (auto &q : queries) {
+            if (q[0] == 1) {
+                ans.push_back(t[q[3]].query(q[1] + 1, q[2] + 1));
+            } else {
+                int i = q[1];
+                update(i, -1);
+                nums[i] = q[2];
+                update(i, 1);
+            }
         }
 
         return ans;
     }
 };
-
-int main()
-{
+int main() {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
+
+    
 
     return 0;
 }

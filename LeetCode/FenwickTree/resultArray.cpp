@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-using i64 = long long;
+using ll = long long;
 using namespace std;
 
 // 模板来源 https://leetcode.cn/circle/discuss/mOr1u6/
@@ -50,35 +50,50 @@ public:
     }
 };
 
-class Solution
-{
+class Solution {
 public:
-    int reversePairs(vector<int> &nums)
-    {
+    vector<int> resultArray(vector<int>& nums) {
+        int n = nums.size();
         vector<int> sorted = nums;
         ranges::sort(sorted);
         sorted.erase(ranges::unique(sorted).begin(), sorted.end());
+        
+        int m = sorted.size();
+        vector<int> arr1, arr2;
+        FenwickTree<int> t1(m), t2(m);
 
-        FenwickTree<int> t(sorted.size());
-        int ans = 0, n = nums.size();
+        arr1.push_back(nums[0]);
+        int idx1 = ranges::lower_bound(sorted, nums[0]) - sorted.begin() + 1;
+        t1.update(idx1, 1);
+        
+        arr2.push_back(nums[1]);
+        int idx2 = ranges::lower_bound(sorted, nums[1]) - sorted.begin() + 1;
+        t2.update(idx2, 1);
 
-        for (int i = n - 1; i >= 0; i--)
-        {
-            long long x = nums[i];
-            int idx1 = ranges::lower_bound(sorted, x) - sorted.begin();
-            int idx2 = ranges::lower_bound(sorted, floor((x + 1.0) / 2.0)) - sorted.begin();
+        for (int i = 2; i < n; i++) {
+            int x = nums[i];
+            int idx = ranges::lower_bound(sorted, x) - sorted.begin() + 1;
+            int gc1 = arr1.size() - t1.pre(idx);
+            int gc2 = arr2.size() - t2.pre(idx);
 
-            ans += t.pre(idx2);
-            t.update(idx1 + 1, 1);
+            if (gc1 > gc2 || gc1 == gc2 && arr1.size() <= arr2.size()) {
+                arr1.push_back(x);
+                t1.update(idx, 1);
+            } else {
+                arr2.push_back(x);
+                t2.update(idx, 1);
+            }
         }
 
-        return ans;
+        arr1.insert(arr1.end(), arr2.begin(), arr2.end());
+        return arr1;
     }
 };
-int main()
-{
+int main() {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
+
+    
 
     return 0;
 }
