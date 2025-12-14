@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-using i64 = long long;
+using ll = long long;
 using namespace std;
 
 // 模板来源 https://leetcode.cn/circle/discuss/mOr1u6/
@@ -50,54 +50,38 @@ public:
     }
 };
 
-class Solution
-{
+class Solution {
 public:
-    int countRangeSum(vector<int> &nums, int lower, int upper)
-    {
-        int n = nums.size();
-        vector<long long> pre(n + 1);
-        for (int i = 0; i < n; i++)
-        {
-            pre[i + 1] = pre[i] + 1LL * nums[i];
+    long long numberOfPairs(vector<int>& nums1, vector<int>& nums2, int diff) {
+        int n = nums1.size();
+        vector<int> sorted = nums1;
+        for (int i = 0; i < n; i++) {
+            sorted.push_back(nums1[i] - nums2[i]);
+            sorted[i] = nums1[i] - nums2[i] - diff;
         }
+        ranges::sort(sorted);
+        sorted.erase(ranges::unique(sorted).begin(), sorted.end());
 
-        set<long long> st;
-        for (int i = 0; i <= n; i++)
-        {
-            st.insert(pre[i]);
-            st.insert(pre[i] - lower);
-            st.insert(pre[i] - upper);
-        }
+        FenwickTree<long long> t(sorted.size());
 
-        unordered_map<long long, int> ranks;
-        int idx = 1;
-        for (int x : st)
-        {
-            ranks[x] = idx++;
-        }
+        long long ans = 0;
+        for (int j = 0; j < n; j++) {
+            int x = nums1[j] - nums2[j];
+            int idx1 = ranges::lower_bound(sorted, x) - sorted.begin() + 1;
+            int idx2 = ranges::lower_bound(sorted, x - diff) - sorted.begin() + 1;
+            ans += t.pre(idx1);
 
-        FenwickTree<long long> t(st.size());
-        t.update(ranks[pre[0]], 1);
-
-        int ans = 0;
-        for (int i = 0; i < n; i++)
-        {
-            int left = ranks[pre[i + 1] - upper];
-            int right = ranks[pre[i + 1] - lower];
-            ans += t.query(left, right);
-
-            t.update(ranks[pre[i + 1]], 1);
+            t.update(idx2, 1);
         }
 
         return ans;
     }
 };
-
-int main()
-{
+int main() {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
+
+    
 
     return 0;
 }

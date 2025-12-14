@@ -2,8 +2,6 @@
 using i64 = long long;
 using namespace std;
 
-// 模板来源 https://leetcode.cn/circle/discuss/mOr1u6/
-// 根据题目用 FenwickTree<int> t(n) 或者 FenwickTree<long long> t(n) 初始化
 template <typename T>
 class FenwickTree
 {
@@ -27,60 +25,65 @@ public:
     // 求前缀和 a[1] + ... + a[i]
     // 1 <= i <= n
     // 时间复杂度 O(log n)
-    T pre(int i) const
+    T pre(int i)
     {
         T res = 0;
-        for (; i > 0; i &= i - 1)
+        for (; i > 0; i -= i & -i)
         {
             res += tree[i];
         }
         return res;
-    }
-
-    // 求区间和 a[l] + ... + a[r]
-    // 1 <= l <= r <= n
-    // 时间复杂度 O(log n)
-    T query(int l, int r) const
-    {
-        if (r < l)
-        {
-            return 0;
-        }
-        return pre(r) - pre(l - 1);
     }
 };
 
 class Solution
 {
 public:
-    vector<int> countSmaller(vector<int> &nums)
+    long long minInversionCount(vector<int> &nums, int k)
     {
+        // 离散化
+        // 100 90 80
+        // 3 2 1
         vector<int> sorted = nums;
         ranges::sort(sorted);
         sorted.erase(ranges::unique(sorted).begin(), sorted.end());
         for (int &x : nums)
         {
-            x = ranges::lower_bound(sorted, x) - sorted.begin() + 1;
+            x = ranges::lower_bound(sorted, x) - sorted.begin() + 1; // FenwickTree 下标从 1 开始
         }
 
         FenwickTree<int> t(sorted.size());
+        long long ans = LLONG_MAX, inv = 0;
 
-        int n = nums.size();
-        vector<int> ans(n);
-        for (int i = n - 1; i >= 0; i--)
+        // 滑动窗口
+        for (int i = 0; i < nums.size(); i++)
         {
+            // 1. 入
             int in = nums[i];
-            ans[i] = t.pre(in - 1);
             t.update(in, 1);
+            inv += min(i + 1, k) - t.pre(in); // 窗口大小减去比 in 小的数字 = 逆序对
+
+            int left = i - k + 1;
+            if (left < 0)
+                continue;
+
+            // 2. 更新答案
+            ans = min(ans, inv);
+
+            // 3. 出
+            int out = nums[left];
+            inv -= t.pre(out - 1); // 在 out 右侧比 out 小的数字
+            t.update(out, -1);
         }
 
         return ans;
     }
 };
-int main()
-{
+int main() {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
+
+    
 
     return 0;
 }

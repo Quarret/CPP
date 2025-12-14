@@ -3,6 +3,7 @@ using i64 = long long;
 using namespace std;
 
 class NumArray {
+private:
     vector<int> nums;
     // 树状数组
     vector<int> tree;
@@ -17,14 +18,13 @@ class NumArray {
     }
 
 public:
-    NumArray(vector<int>& nums) {
-        nums.resize(nums.size());
-        tree.resize(nums.size() + 1);
+    NumArray(vector<int> &nums) : nums(nums.size()), tree(nums.size() + 1)
+    {
         for (int i = 0; i < nums.size(); i++) {
             update(i, nums[i]);
         }
     }
-    
+
     void update(int index, int val) {
         int delta = val - nums[index];
         nums[index] = val;
@@ -34,7 +34,7 @@ public:
     }
     
     int sumRange(int left, int right) {
-        return prefixSum[right + 1] - prefixSum[left];
+        return prefixSum(right + 1) - prefixSum(left);
     }
 };
 int main() {
