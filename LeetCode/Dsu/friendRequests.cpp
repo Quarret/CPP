@@ -65,42 +65,29 @@ public:
 class Solution {
 public:
     vector<bool> friendRequests(int n, vector<vector<int>>& restrictions, vector<vector<int>>& requests) {
-        UnionFind is_friend(n);
-        unordered_map<int, unordered_map<int, int>> cant_friend;
-
-        for (auto &p : restrictions) {
-            cant_friend[p[0]][p[1]] = 1;
-            cant_friend[p[1]][p[0]] = 1;
-        }
+        UnionFind dsu(n);
 
         int m = requests.size();
-        vector<bool> ans(m);
+        vector<bool> res(m);
         for (int i = 0; i < m; i++) {
-            int ok = 1;
-            int u = requests[i][0], v = requests[i][1];
-            if (is_friend.is_same(u, v)) {
-                ans[i] = ok;
-                continue;
-            } else if (cant_friend[u][v]) {
-                ans[i] = false;
-                continue;
-            }
+            int fa_u = dsu.find(requests[i][0]);
+            int fa_v = dsu.find(requests[i][1]);
 
-            int fa_u = is_friend.find(u);
-            int fa_v = is_friend.find(v);
-            for (int j = 0; j < n; j++) {
-                if (is_friend.find(j) == fa_u && cant_friend[j][v] ||
-                    is_friend.find(j) == fa_v && cant_friend[j][u]) {
-                    ok = 0;
+            bool ok = true;
+            for (auto &r : restrictions) {
+                int fa_x = dsu.find(r[0]);
+                int fa_y = dsu.find(r[1]);
+                if ((fa_u == fa_x && fa_v == fa_y) || (fa_u == fa_y && fa_v == fa_x)) {
+                    ok = false;
                     break;
                 }
             }
 
-            ans[i] = ok;
-            if (ok) is_friend.merge(u, v);
+            if (ok) dsu.merge(fa_u, fa_v);
+            res[i] = ok;
         }
 
-        return ans;
+        return res;
     }   
 };
 
