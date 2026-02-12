@@ -95,5 +95,9 @@
         "print": "cpp",
         "text_encoding": "cpp"
     },
-    "C_Cpp.errorSquiggles": "enabled"
+    "C_Cpp.errorSquiggles": "enabled",
+    "code-runner.executorMap": {
+        "cpp": "cd $dir && g++ -std=c++23 $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt"
+    },
+    "cph.language.cpp.Args": "-std=c++23"
 }
