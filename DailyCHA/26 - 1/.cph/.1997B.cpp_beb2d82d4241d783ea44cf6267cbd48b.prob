@@ -1,0 +1,1 @@
+{"name":"Local: 1997B","url":"d:\\VScode\\C++\\DailyCHA\\26 - 1\\1997B.cpp","tests":[{"id":1768798884362,"input":"5\n8\n.......x\n.x.xx...\n2\n..\n..\n3\nxxx\nxxx\n9\n..x.x.x.x\nx.......x\n3\nxxx\n...","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\VScode\\C++\\DailyCHA\\26 - 1\\1997B.cpp","group":"local","local":true}

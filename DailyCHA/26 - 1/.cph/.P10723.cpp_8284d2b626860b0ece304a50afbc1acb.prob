@@ -1,0 +1,1 @@
+{"name":"Local: P10723","url":"d:\\VScode\\C++\\DailyCHA\\26 - 1\\P10723.cpp","tests":[{"id":1767698433677,"input":"5\n0 1 0 1 0\n1 2\n1 3\n3 4\n3 5","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\VScode\\C++\\DailyCHA\\26 - 1\\P10723.cpp","group":"local","local":true}

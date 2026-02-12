@@ -1,0 +1,1 @@
+{"name":"Local: CF2144B","url":"d:\\VScode\\C++\\DailyConstruction\\CF2144B.cpp","tests":[{"id":1767420560312,"input":"4\n5\n1 0 4 0 5\n3\n0 0 0\n4\n1 2 3 0\n3\n0 3 2","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\VScode\\C++\\DailyConstruction\\CF2144B.cpp","group":"local","local":true}
