@@ -80,14 +80,10 @@ void solve() {
         int target = ans >> i;
 
         for (auto &[x, y, w] : edges) {
-            // i 位上为 0 就加入并查集
             if ((w >> i | target) != target) continue;
-            // cout << x << ' ' << y << ' ' << w << ' ' << ans << '\n';
             dsu.merge(x, y);
         }
 
-        // 如果没有 i 上为 1 的边, 1 与 n 无法联通则答案 i 位上必须为 1
-        // cout << dsu.find(1) << ' ' << dsu.find(n) << '\n';
         if (!dsu.is_same(1, n)) ans |= 1 << i;
     }
 

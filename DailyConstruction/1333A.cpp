@@ -11,7 +11,7 @@ void solve() {
 
     for (auto &row : ans) {
         for (char c : row) {
-            cout << c << ' ';
+            cout << c;
         }
         cout << '\n';
     }
