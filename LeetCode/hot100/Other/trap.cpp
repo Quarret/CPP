@@ -21,6 +21,27 @@ int trap(vector<int>& height) {
 
     return ans;
 }
+
+// 单调栈, 找左侧第一个大于 height[i]
+int trap(vector<int>& height) {
+    int ans = 0;
+    vector<int> st;
+    for (int i = 0; i < height.size(); i++) {
+        int h = height[i];
+        while (!st.empty() && height[st.back()] <= h) {
+            int bottom_h = height[st.back()];
+            st.pop_back();
+
+            if (st.empty()) break;
+            int left = st.back();
+            int dh = min(height[left], h) - bottom_h;
+            ans += dh * (i - left - 1); // 去除容器两壁
+        }
+        st.push_back(i);
+    }
+
+    return ans;
+}
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(NULL);

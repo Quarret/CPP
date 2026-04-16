@@ -1,0 +1,17 @@
+#include <bits/stdc++.h>
+using ll = long long;
+using namespace std;
+
+bool canBeEqual(string s1, string s2) {
+    bool ok1 = (s1[0] == s2[0] && s1[2] == s2[2]) || (s1[0] == s2[2] && s1[2] == s2[0]);
+    bool ok2 = (s1[1] == s2[1] && s1[3] == s2[3]) || (s1[1] == s2[3] && s1[3] == s2[1]);
+    return ok1 || ok2;
+}
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    
+
+    return 0;
+}

@@ -19,6 +19,15 @@ void moveZeroes(vector<int>& nums) {
             }
         }
 }
+
+// 原地栈
+void moveZeroes(vector<int>& nums) {
+    int idx = 0;
+    for (int x : nums) {
+        if (x) nums[idx] = x; 
+    }
+    fill(nums.begin() + idx, nums.end(), 0);
+}
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(NULL);

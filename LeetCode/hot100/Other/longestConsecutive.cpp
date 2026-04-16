@@ -60,6 +60,21 @@ int longestConsecutive1(vector<int>& nums) {
     return ans;
 }
 
+int longestConsecutive1(vector<int>& nums) {
+    int ans = 0;
+    unordered_set<int> st(nums.begin(), nums.end()); // st 去重
+    for (int x : st) {
+        if (st.contains(x - 1)) continue; // x 不是序列起点, 保证时间复杂度 O(n)
+
+        int y = x + 1;
+        while (st.contains(y)) {
+            y++;
+        }
+
+        ans = max(ans, y - x);
+    }
+}
+
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(NULL);

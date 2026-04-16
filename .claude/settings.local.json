@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir:*)",
+      "Bash(g++ -o b b.cpp -O2)",
+      "Bash(./b)"
+    ]
+  }
+}
