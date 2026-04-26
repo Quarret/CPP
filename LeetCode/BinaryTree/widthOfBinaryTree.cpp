@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-#include "TreeNode.h"
+#include <bits/stdc++.h>ms-vscode.cpptools
 using i64 = long long;
 using namespace std;
 
@@ -11,7 +10,7 @@ int widthOfBinaryTree(TreeNode* root) {
     while (!q.empty()) {
         int t = q.size();
         bool ok = false;
-
+        
         int l = -1, r = -1;
         for (int i = 0; i < t; i++) {
             auto node = q.front();

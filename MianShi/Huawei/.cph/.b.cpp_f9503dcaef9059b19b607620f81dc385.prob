@@ -1,0 +1,1 @@
+{"name":"Local: b","url":"d:\\VScode\\C++\\MianShi\\Huawei\\b.cpp","tests":[{"id":1776858875047,"input":"3 3\n0 1 0\n0 0 0\n2 0 0","output":""},{"id":1776858948811,"input":"-2 2\n0 0\n0 0","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\VScode\\C++\\MianShi\\Huawei\\b.cpp","group":"local","local":true}
